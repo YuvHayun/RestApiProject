@@ -42,7 +42,7 @@ def list_beer():
         filtered_beer_list = []
         filter_values = filter_value.split(',')
         for _beer in beer_list:
-            if _beer[filter_name] in filter_value:
+            if _beer[filter_name] in filter_values:
                 filtered_beer_list.append(_beer)
 
         # filtered list is now the "main" list

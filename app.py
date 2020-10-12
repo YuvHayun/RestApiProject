@@ -32,15 +32,17 @@ atexit.register(on_exit_app)
 def list_beer():
     beer_list = list(beers.values())
     for filter_name in ['name', 'brand', 'isbn', 'price']:
-        filter_value = request.args.get('filter['+filter_name+']')
+        filter_value = request.args.get(f'filter[{filter_name}]')
+
         # if filter not given, nothing to filter, continue
         if not filter_value:
             continue
 
         # do the filtering
         filtered_beer_list = []
+        filter_value = filter_value.split(',')
         for _beer in beer_list:
-            if filter_value.find(str(_beer[filter_name])) != -1:
+            if _beer[filter_name] in filter_value:
                 filtered_beer_list.append(_beer)
 
         # filtered list is now the "main" list

@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "e4ebd900-55ce-43c9-9528-760713dd28b3",
+		"name": "Beers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Malka Behira",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \t\"name\" : \"behira\",\r\n\t\"brand\" : \"Malka\",\r\n\t\"price\" : 22.80,\r\n\t\"isbn\" : 72913\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/beers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Malka Admonit",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \t\"name\" : \"Admonit\",\r\n\t\"brand\" : \"Malka\",\r\n\t\"price\" : 11.80,\r\n\t\"isbn\" : 72533\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/beers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Alexander Green",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \t\"name\" : \"green\",\r\n\t\"brand\" : \"Alexander\",\r\n\t\"price\" : 3.51,\r\n\t\"isbn\" : 78513\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/beers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Alexander Blonde",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \t\"name\" : \"blonde\",\r\n\t\"brand\" : \"Alexander\",\r\n\t\"price\" : 22.80,\r\n\t\"isbn\" : 72333\r\n}"
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/beers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List all beers",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"blonde\",\r\n\t\"brand\" : \"Alexander\",\r\n\t\"price\" : 22.80,\r\n\t\"isbn\" : 72333\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/beers",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"beers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List beers by brand",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/beers?filter[brand]=Alexander",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"beers"
+					],
+					"query": [
+						{
+							"key": "filter[brand]",
+							"value": "Alexander"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get beer by isbn",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/beers/72333",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"beers",
+						"72333"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update beer by isbn",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Blazer\",\r\n\t\"price\" : 20.99\r\n\t\r\n}",
+					"options": {
+						"raw": {}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:5000/beers/72333",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"beers",
+						"72333"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete beer by isbn",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/beers/72533",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						"beers",
+						"72533"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8c5804ed-c553-4737-8c03-13498d10d80b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "cef7781d-85ba-4363-8b11-7f3e0f72440e",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

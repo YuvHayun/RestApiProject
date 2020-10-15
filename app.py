@@ -33,8 +33,8 @@ async def get_beer(isbn: str):
 async def list_beer(req: Request):
     beer_list = list(beers.values())
     for filter_name in ['name', 'brand', 'isbn', 'price']:
-        if f'filter[{filter_name}]' in req.query_params:
-            filter_value = req.query_params[f'filter[{filter_name}]']
+        filter_value = req.query_params.get(f'filter[{filter_name}]')
+        if filter_value is not None:
             filtered_beer_list = []
             filter_values = filter_value.split(',')
             for _beer in beer_list:

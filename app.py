@@ -26,7 +26,7 @@ def shutdown_event():
 async def get_beer(isbn: str):
     if isbn in beers:
         return beers[isbn]
-    raise HTTPException(status_code=404, detail="Item not found")
+    raise HTTPException(status_code=404, detail=f"Beer {isbn} not found")
 
 
 @app.get("/beers")
@@ -78,4 +78,3 @@ async def delete_beer(isbn: str):
         del beers[isbn]
         raise HTTPException(status_code=204)
     raise HTTPException(status_code=404, detail="Item not found")
-

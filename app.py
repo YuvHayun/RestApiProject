@@ -69,7 +69,7 @@ async def update_beer(isbn: str, name: str = Body(''), brand: str = Body(''), pr
         if name:
             beers[isbn]["price"] = price
         raise HTTPException(status_code=204)
-    raise HTTPException(status_code=400, detail="Item not found")
+    raise HTTPException(status_code=400)
 
 
 @app.delete("/beers/{isbn}")

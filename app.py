@@ -30,7 +30,7 @@ async def get_beer(isbn: str):
 
 
 @app.get("/beers")
-async def list_beer(req: Request):
+async def list_beers(req: Request):
     beer_list = list(beers.values())
     for filter_name in ['name', 'brand', 'isbn', 'price']:
         filter_value = req.query_params.get(f'filter[{filter_name}]')

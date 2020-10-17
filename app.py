@@ -2,7 +2,6 @@ from fastapi import FastAPI, HTTPException, Body, Request
 import json
 from pydantic import BaseModel
 import uvicorn
-from fastapi.encoders import jsonable_encoder
 
 app = FastAPI()
 beers = {}
@@ -57,8 +56,7 @@ async def list_beers(req: Request):
 async def create_beer(beer: Beer):
     if not beer.name or not beer.brand or not beer.price or not beer.isbn:
         raise HTTPException(status_code=400, detail="Item not found")
-    update_item_encoded = jsonable_encoder(beer)
-    beers[str(update_item_encoded.isbn)] = update_item_encoded
+    beers[str(beer.isbn)] = beer
     raise HTTPException(status_code=204)
 
 

@@ -1,7 +1,9 @@
-from fastapi import FastAPI, HTTPException, Body, Request
+from fastapi import FastAPI, HTTPException, Request
 import json
 from pydantic import BaseModel
+from typing import Optional
 import uvicorn
+import aiofiles
 
 app = FastAPI()
 beers = {}
@@ -11,23 +13,23 @@ beers = {}
 async def startup_event():
     global beers
     try:
-        with open("data.json", "r+") as file:
-            beers = json.load(file)
+        async with aiofiles.open("data.json", mode='r+', json=True) as file:
+            beers = await file.read()
     except:
         beers = {}
 
 
 @app.on_event("shutdown")
 async def on_exit_app():
-    with open("data.json", "w+") as outfile:
-        json.dump(beers, outfile)
+    async with aiofiles.open("data.json", "w+") as outfile:
+        await outfile.write(str(beers))
 
 
 class Beer(BaseModel):
-    name: str
-    brand: str
-    price: float
-    isbn: int
+    name: Optional[str] = None
+    brand: Optional[str] = None
+    price: Optional[float] = None
+    isbn: Optional[int] = None
 
 
 @app.get("/beers/{isbn}")
@@ -52,33 +54,30 @@ async def list_beers(req: Request):
     return beer_list
 
 
-@app.post("/beers")
+@app.post("/beers", status_code=201)
 async def create_beer(beer: Beer):
     if not beer.name or not beer.brand or not beer.price or not beer.isbn:
-        raise HTTPException(status_code=400, detail="Item not found")
+        raise HTTPException(status_code=400, detail="Not a beer model")
     beers[str(beer.isbn)] = beer
-    raise HTTPException(status_code=204)
 
 
 @app.patch("/beers/{isbn}")
-async def update_beer(isbn: str, name: str = Body(''), brand: str = Body(''), price: float = Body('')):
-    if isbn in beers:
-        if name:
-            beers[isbn]["name"] = name
-        if brand:
-            beers[isbn]["brand"] = brand
-        if name:
-            beers[isbn]["price"] = price
-        raise HTTPException(status_code=204)
-    raise HTTPException(status_code=400)
+async def update_beer(isbn: str, beer: Beer):
+    if isbn not in beers:
+        raise HTTPException(status_code=404, detail="Item not found")
+    if beer.name:
+        beers[isbn]["name"]: beer.name
+    if beer.brand:
+        beers[isbn]["brand"]: beer.brand
+    if beer.name:
+        beers[isbn]["price"]: beer.price
 
 
 @app.delete("/beers/{isbn}")
 async def delete_beer(isbn: str):
-    if isbn in beers:
-        del beers[isbn]
-        raise HTTPException(status_code=204)
-    raise HTTPException(status_code=404, detail="Item not found")
+    if isbn not in beers:
+        raise HTTPException(status_code=404, detail="Item not found")
+    del beers[isbn]
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

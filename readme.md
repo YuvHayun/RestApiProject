@@ -8,7 +8,7 @@ To run this project please type from your terminal `pip install -r requirements.
 
 
 ## Running the tests:
-To run the server you need to type from you terminal `uvicorn app:app --reload`.
+To run the server you need to type from you terminal `python app.py`.
 To run this tests it is highly recommended that you will use postman.
 The address for the database is 'http://127.0.0.1:8000/beers'.
 You can use the postman's methods: 'get','post','patch','delete'.

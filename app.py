@@ -22,7 +22,7 @@ async def startup_event():
 @app.on_event("shutdown")
 async def on_exit_app():
     async with aiofiles.open("data.json", "w+") as outfile:
-        await outfile.write(str(beers))
+        await outfile.write(beers)
 
 
 class Beer(BaseModel):

@@ -13,16 +13,22 @@ beers = {}
 async def startup_event():
     global beers
     try:
-        async with aiofiles.open("data.json", mode='r+', json=True) as file:
-            beers = await file.read()
-    except:
+        async with aiofiles.open("data.json", mode='r+') as file:
+            beers_string = await file.read()
+        beers = json.loads(beers_string)
+    except Exception as exc:
+        print(exc)
         beers = {}
 
 
 @app.on_event("shutdown")
 async def on_exit_app():
+    dict_to_save = {}
+    for beer_name, beer in beers.items():
+        dict_to_save[beer_name] = beer.dict()
     async with aiofiles.open("data.json", "w+") as outfile:
-        await outfile.write(str(beers))
+        beers_to_save = json.dumps(dict_to_save)
+        await outfile.write(beers_to_save)
 
 
 class Beer(BaseModel):
